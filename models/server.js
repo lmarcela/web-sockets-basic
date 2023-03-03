@@ -2,9 +2,9 @@ const express = require("express");
 const http = require("http");
 const socketio = require("socket.io");
 const path = require("path");
+const Sockets = require("./sockets");
 
 class Server {
-
   constructor() {
     this.app = express();
     this.port = 8080;
@@ -18,14 +18,14 @@ class Server {
     this.app.use(express.static(path.resolve(__dirname, "../public")));
   }
 
-  configurarSockets(){
-    
+  configurarSockets() {
+    new Sockets(this.io);
   }
 
   exceute() {
-    this.middlewares()
+    this.middlewares();
 
-    this.configurarSockets()
+    this.configurarSockets();
 
     this.server.listen(this.port, () => {
       console.log("Server corriendo en puerto: ", this.port);
