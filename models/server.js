@@ -3,11 +3,12 @@ const http = require("http");
 const socketio = require("socket.io");
 const path = require("path");
 const Sockets = require("./sockets");
+const cors = require("cors");
 
 class Server {
   constructor() {
     this.app = express();
-    this.port = 8080;
+    this.port = process.env.PORT;
 
     this.server = http.createServer(this.app);
 
@@ -20,6 +21,7 @@ class Server {
 
   configurarSockets() {
     new Sockets(this.io);
+    this.app.use(cors());
   }
 
   exceute() {
