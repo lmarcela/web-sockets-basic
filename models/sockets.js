@@ -8,11 +8,15 @@ class Sockets {
 
   socketEvents() {
     this.io.on("connection", (socket) => {
+      console.log("connected client!");
+
       socket.emit("current-movies", this.moviesList.getMovies());
-      // socket.on("mensaje-al-servidor", (data) => {
-      //   console.log("el cliente envio algo", data);
-      //   this.io.emit("mensaje-del-servidor", data);
-      // });
+
+      socket.on("vote-movie", (id) => {
+        this.moviesList.increaseVotes(id);
+        this.io.emit("current-movies", this.moviesList.getMovies());
+      });
+
     });
   }
 }
