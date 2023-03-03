@@ -17,6 +17,11 @@ class Sockets {
         this.io.emit("current-movies", this.moviesList.getMovies());
       });
 
+      socket.on("remove-movie", (id) => {
+        this.moviesList.removeMovies(id);
+        this.io.emit("current-movies", this.moviesList.getMovies());
+      });
+
     });
   }
 }
