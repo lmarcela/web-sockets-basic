@@ -22,11 +22,15 @@ class Sockets {
         this.io.emit("current-movies", this.moviesList.getMovies());
       });
 
-      socket.on("change-name-movie", ({id, name}) => {
+      socket.on("change-name-movie", ({ id, name }) => {
         this.moviesList.changeName(id, name);
         this.io.emit("current-movies", this.moviesList.getMovies());
       });
 
+      socket.on("create-movie", ({ name }) => {
+        this.moviesList.addMovie(name);
+        this.io.emit("current-movies", this.moviesList.getMovies());
+      });
     });
   }
 }
