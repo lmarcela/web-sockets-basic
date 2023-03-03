@@ -1,3 +1,5 @@
+const Movie = require("./movie");
+
 class MovieList {
   constructor() {
     this.movies = [
@@ -5,7 +7,7 @@ class MovieList {
       new Movie("Como si fuera la primera vez"),
       new Movie("Son como niños"),
       new Movie("Una pareja explosiva"),
-      new movie("Amigos intocables"),
+      new Movie("Amigos intocables"),
     ];
   }
 
@@ -41,3 +43,5 @@ class MovieList {
     });
   }
 }
+
+module.exports = MovieList;
