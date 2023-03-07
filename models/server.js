@@ -13,21 +13,22 @@ class Server {
     this.server = http.createServer(this.app);
 
     this.io = socketio(this.server);
+
+    this.sockets = new Sockets(this.io);
   }
 
   middlewares() {
     this.app.use(express.static(path.resolve(__dirname, "../public")));
-  }
 
-  configurarSockets() {
-    new Sockets(this.io);
     this.app.use(cors());
+
+    this.app.get("/last-ones", (req, res) => {
+      res.json({ ok: true, last: this.sockets.ticketList.last13 });
+    });
   }
 
-  exceute() {
+  execute() {
     this.middlewares();
-
-    this.configurarSockets();
 
     this.server.listen(this.port, () => {
       console.log("Server corriendo en puerto: ", this.port);

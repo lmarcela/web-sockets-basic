@@ -3,4 +3,4 @@ require("dotenv").config();
 
 const server = new Server();
 
-server.exceute();
+server.execute();
