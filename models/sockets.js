@@ -18,6 +18,8 @@ class Sockets {
       socket.on("next-ticket-to-do", ({ asesor, escritorio }, callback) => {
         const ticket = this.ticketList.assignTicket(asesor, escritorio);
         callback(ticket);
+
+        this.io.emit("assigned-ticket", this.ticketList.last13);
       });
     });
   }
