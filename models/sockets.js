@@ -11,10 +11,7 @@ class Sockets {
 
   socketEvents() {
     this.io.on("connection", (socket) => {
-      socket.on("mensaje-al-servidor", (data) => {
-        console.log("el cliente envio algo", data);
-        this.io.emit("mensaje-del-servidor", data);
-      });
+      console.log("cliente conectado!")
     });
   }
 }
