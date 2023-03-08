@@ -20,6 +20,8 @@ class Server {
 
   middlewares() {
     this.app.use(express.static(path.resolve(__dirname, "../public")));
+
+    this.app.use("/api/login", require("../router/auth"));
   }
 
   configurarSockets() {
