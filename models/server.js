@@ -24,6 +24,7 @@ class Server {
     this.app.use(express.json());
 
     this.app.use("/api/login", require("../router/auth"));
+    this.app.use("/api/messages", require("../router/messages"));
   }
 
   configurarSockets() {
