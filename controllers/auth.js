@@ -29,27 +29,54 @@ const createUser = async (req, res = response) => {
       token,
     });
   } catch (error) {
-    console.log(error);
-    res.status(500).json({
-      ok: false,
-      msg: "Contact administrator",
-    });
+    showServerError(error, res);
   }
 };
 
 const login = async (req, res = response) => {
   const { email, password } = req.body;
-  res.json({
-    ok: true,
-    msg: "login",
-    email,
-    password,
-  });
+
+  try {
+    const userDB = await User.findOne({ email });
+    if (!userDB) {
+      return res.status(404).json({
+        ok: false,
+        msg: "Email not found",
+      });
+    }
+
+    const validPassword = bcrypt.compareSync(password, userDB.password);
+    if (!validPassword) {
+      return res.status(404).json({
+        ok: false,
+        msg: "Password is wrong",
+      });
+    }
+
+    const token = await generateJWT(userDB.id);
+
+    res.json({
+      ok: true,
+      user: userDB,
+      token,
+    });
+  } catch (error) {
+    showServerError(error, res);
+  }
 };
+
 const renewToken = async (req, res = response) => {
   res.json({
     ok: true,
     msg: "renew",
+  });
+};
+
+const showServerError = (error, res) => {
+  console.log(error);
+  res.status(500).json({
+    ok: false,
+    msg: "Contact administrator",
   });
 };
 
