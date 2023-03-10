@@ -33,9 +33,9 @@ class Server {
   }
 
   exceute() {
-    this.middlewares();
-
     this.configurarSockets();
+
+    this.middlewares();
 
     this.server.listen(this.port, () => {
       console.log("Server corriendo en puerto: ", this.port);
