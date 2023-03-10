@@ -32,7 +32,7 @@ class Server {
     this.app.use(cors());
   }
 
-  exceute() {
+  execute() {
     this.configurarSockets();
 
     this.middlewares();
