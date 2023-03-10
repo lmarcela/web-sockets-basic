@@ -1,3 +1,5 @@
+const { checkJWT } = require("../helpers/jwt");
+
 class Sockets {
   constructor(io) {
     this.io = io;
@@ -6,9 +8,17 @@ class Sockets {
 
   socketEvents() {
     this.io.on("connection", (socket) => {
-      socket.on("mensaje-al-servidor", (data) => {
-        console.log("el cliente envio algo", data);
-        this.io.emit("mensaje-del-servidor", data);
+      const [valid, uid] = checkJWT(socket.handshake.query["x-token"]);
+
+      if (!valid) {
+        console.log("socket no identificado");
+        return socket.disconnect();
+      }
+
+      console.log("Cliente conectado!", uid);
+
+      socket.on("disconnect", async () => {
+        console.log("Cliente desconectado!", uid);
       });
     });
   }
