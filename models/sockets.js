@@ -1,4 +1,8 @@
-const { userConnected, userDisconnected } = require("../controllers/sockets");
+const {
+  userConnected,
+  userDisconnected,
+  getUsers,
+} = require("../controllers/sockets");
 const { checkJWT } = require("../helpers/jwt");
 
 class Sockets {
@@ -17,6 +21,9 @@ class Sockets {
       }
 
       await userConnected(uid);
+
+      // Emitir todos los usuarios conectados
+      this.io.emit("user-list", await getUsers());
 
       socket.on("disconnect", async () => {
         await userDisconnected(uid);
