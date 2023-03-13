@@ -32,7 +32,10 @@ class Sockets {
       // Escuchar cuando el cliente manda un mensaje
       socket.on("personal-message", async (payload) => {
         const message = await saveMessage(payload);
-        console.log(message);
+
+        this.io.to(payload.to).emit("personal-message", message);
+
+        this.io.to(payload.from).emit("personal-message", message);
       });
 
       socket.on("disconnect", async () => {
