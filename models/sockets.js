@@ -22,8 +22,16 @@ class Sockets {
 
       await userConnected(uid);
 
+      // Unir al usuario a una sala de socket.io
+      socket.join(uid);
+
       // Emitir todos los usuarios conectados
       this.io.emit("user-list", await getUsers());
+
+      // Escuchar cuando el cliente manda un mensaje
+      socket.on("personal-message", (payload) => {
+        console.log(payload);
+      });
 
       socket.on("disconnect", async () => {
         await userDisconnected(uid);
