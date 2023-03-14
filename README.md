@@ -1,4 +1,4 @@
-# Rama main - Web socket con socket io
+# Rama chatApp - Web socket con socket io
 
 Este backend contiene todo lo necesario para configurar un servidor de express + socket.io.
 
