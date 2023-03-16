@@ -1,6 +1,12 @@
-# Basic
+# Rama movieNamesApp - Web socket con socket io
 
-En esta rama se hace uso de socket-io sin React. La app consiste en enviar data del cliente al server y el server hace llegar esa informacion a todos los clientes.
+Este backend contiene todo lo necesario para configurar un servidor de express + socket.io.
+
+Cualquier conexión adicional de sockets, se puede hacer en el archivo models/sockets.js y cualquier middleware adicional de express, se puede realizar en el archivo models/server.js
+
+Demo app: https://react-app-for-socket-m81wap1rv-lmarcela.vercel.app/
+
+Url backend: https://node-socket-movies.onrender.com
 
 ## Uso
 ```bash
