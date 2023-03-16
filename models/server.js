@@ -1,5 +1,6 @@
 const express = require("express");
 const http = require("http");
+const os = require("os");
 const socketio = require("socket.io");
 const path = require("path");
 const Sockets = require("./sockets");
@@ -38,7 +39,7 @@ class Server {
     this.middlewares();
 
     this.server.listen(this.port, () => {
-      console.log("Server corriendo en puerto: ", this.port);
+      console.log(`Server corriendo en ${os.hostname()}:${this.port}/`);
     });
   }
 }
