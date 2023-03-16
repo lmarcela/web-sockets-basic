@@ -11,14 +11,5 @@
       "src": "/(.*)",
       "dest": "/"
     }
-  ],
-  "functions": {
-    "api": {
-      "memory": 1024,
-      "maxDuration": 10,
-      "runtime": "node12",
-      "entrypoint": "./index.js",
-      "events": [{ "websocket": "" }]
-    }
-  }
+  ]
 }
