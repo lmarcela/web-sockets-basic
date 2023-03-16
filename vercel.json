@@ -1,11 +1,22 @@
 {
-  "functions": {
-    "api": {
-      "memory": 1024,
-      "maxDuration": 10,
-      "runtime": "node12",
-      "entrypoint": "./index.js",
-      "events": [{ "websocket": true }]
+  "version": 2,
+  "builds": [
+    {
+      "src": "./index.js",
+      "use": "@vercel/node"
     }
-  }
+  ],
+  "routes": [
+    {
+      "src": "/ws",
+      "dest": "./index.js",
+      "protocols": [
+        "websocket"
+      ]
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/"
+    }
+  ]
 }
